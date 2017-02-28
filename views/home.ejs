@@ -1,0 +1,109 @@
+<html>
+	<head>
+	    <title>Expa Test</title>
+
+	    <meta charset ="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+
+	    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.css" rel="stylesheet">
+	    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	    <script src="/app.js"></script>
+	</head>
+
+  	<body class="coming-soon-bg">
+    	<section ng-app="myApp">
+      		<div class="container text-center">
+      			<div class="row">
+        			<div class="col-md-3"><h1>Add Details</h1></div>
+        		</div>
+    			<div class="row">
+    				<form class="form-inline" role="search" action="/" method="post">
+	    				<div class="col-md-3 well">
+	    					<div class="row">
+	        					<div class="form-group">
+	        						<input type="text" name="firstname" class="form-control" placeholder="First Name" style="margin-bottom:15px;">
+	        					</div>
+	        					<div class="form-group">
+	        						<input type="text" name="lastname" class="form-control" placeholder="Last Name" style="margin-bottom:15px;">
+	        					</div>
+	        				</div>
+	        				<div class="row">
+	        					<div class="form-group">
+	        						<input type="text" name="location" class="form-control" placeholder="Location" style="margin-bottom:15px;">
+	        					</div>
+	    						<div class="form-group">
+	    							<input type="number" name="age" class="form-control" placeholder="Age" style="margin-bottom:15px;">
+	    						</div>
+	    						<div class="form-group">
+	    							<select name="roles" class="form-control" multiple style="margin-bottom:15px;">
+	    								<% roles.forEach(function(role) { %>
+					                    	<option value="<%= role.role %>"><%= role.role %></option>
+					                    <% }); %>
+									</select>
+	    						</div>
+	    					</div>
+	    					<div class="row">
+	    						<div class="form-group">
+	    							<button type="submit" class="btn btn-primary">SUBMIT</button>
+	    						</div>
+	    					</div>
+	    				</div>
+	    			</form>
+    				<div class="col-md-9 well" ng-controller="SearchController">
+    					<div class="table-responsive">
+    						<form class="form-inline" role="search" method="get">
+    							<div class="row">
+		        					<div class="form-group">
+		        						<input type="text" class="form-control" ng-model="search.role" placeholder="Role">
+		        					</div>
+		        					<div class="form-group">
+		        						<input type="text" class="form-control" ng-model="search.location" placeholder="Location">
+		        					</div>
+		        					<div class="form-group">
+		        						<button type="submit" class="btn btn-primary" ng-click="searchUsers()">
+		        							Search
+		        						</button>
+		        					</div>
+		        				</div>
+    						</form>
+    						<table class="table">
+    							<thead>
+    								<tr>
+    									<th>
+    										First Name <i class="fa fa-sort" aria-hidden="true" ng-click="sort('firstname', url)"></i>
+    									</th>
+    									<th>
+    										Last Name <i class="fa fa-sort" aria-hidden="true" ng-click="sort('lastname', url)"></i>
+    									</th>
+    									<th>
+    										Location <i class="fa fa-sort" aria-hidden="true" ng-click="sort('location', url)"></i>
+    									</th>
+    									<th>
+    										Age <i class="fa fa-sort" aria-hidden="true" ng-click="sort('age', url)"></i>
+    									</th>
+    									<th>Roles </th>
+    									<th>Actions </th>
+    								</tr>
+    							</thead>
+    							<tbody>
+        							<tr ng-repeat="user in users">
+									  	<td class="active">{{user.firstname}}</td>
+									  	<td class="success">{{user.lastname}}</td>
+									  	<td class="warning">{{user.location}}</td>
+									  	<td class="danger">{{user.age}}</td>
+									  	<td class="info">{{user.roles}}</td>
+									  	<td class="info" ng-click="removeItem(user._id)">Delete</td>
+									</tr>
+								</tbody>
+    						</table>
+    					</div>
+    				</div>
+	    		</div>
+      		</div>
+    	</section>
+  	</body>
+</html>
